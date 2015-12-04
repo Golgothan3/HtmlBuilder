@@ -62,6 +62,11 @@ namespace HtmlBuilder
         {
             return (from child in Children where child.TagName == tagName select child).ToList();
         }
+
+        public void RemoveAttribute(string attributeName)
+        {
+            Attributes.Remove((from HtmlAttribute attr in Attributes where attr.Name == attributeName select attr).First());
+        }
     }
 
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Linq;
 
 namespace HtmlBuilder
 {
@@ -48,7 +49,7 @@ namespace HtmlBuilder
             for (int i = 0; i <= columnData.Count - 1; i++)
             {
                 newRow.Children.Add(new HtmlElement("td"));
-                newRow.GetChildrenByTagName("td")[newRow.GetChildrenByTagName("td").Count - 1].Children.Add(new HtmlContent(columnData[i]));
+                newRow.GetChildrenByTagName("td").Last().Children.Add(new HtmlContent(columnData[i]));
             }
 
             return newRow;
@@ -67,7 +68,7 @@ namespace HtmlBuilder
             for (int i = 0; i <= Columns.Count - 1; i++)
             {
                 firstRow.Children.Add(new HtmlElement("th"));
-                firstRow.GetChildrenByTagName("th")[firstRow.GetChildrenByTagName("th").Count - 1].Children.Add(new HtmlContent(Columns[i]));
+                firstRow.GetChildrenByTagName("th").Last().Children.Add(new HtmlContent(Columns[i]));
             }
         }
 
@@ -84,7 +85,7 @@ namespace HtmlBuilder
 
         public HtmlElement GetLastRow()
         {
-            return Rows[Rows.Count - 1];
+            return Rows.Last();
         }
 
         public HtmlElement GetFirstRow()

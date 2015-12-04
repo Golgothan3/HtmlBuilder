@@ -11,44 +11,30 @@ namespace ClassTest
     {
         static void Main(string[] args)
         {
-            HtmlDocument doc = new HtmlDocument("RandomPage");
+            HtmlDocument doc = new HtmlDocument("HtmlBuilder Rocks");
 
-            HtmlElement root = new HtmlElement("div", "topDiv", "randomClass");
-            root.CssClass.AddClass("abc");
-            root.CssClass.AddClass("asdfjklj");
-            root.CssClass.AddClass("butt");
-            root.CssClass.RemoveClass("asdfjklj");
-            root.CssClass.RemoveClass("abc");
-            root.CssClass.RemoveClass("RandomClass");
-            root.CssClass.RemoveClass("butt");
+            doc.DocType = "<!DOCTYPE html>";
 
-            HtmlTable table = new HtmlTable();
-            table.SetColumns(new List<string> { "aaa", "bbb", "ccc" });
-            table.AddRow(new List<string> { "111", "222", "333" });
-            table.AddRow(new List<string> { "total", "2" });
-            table.Rows.Last().Children[0].Attributes.Add(new HtmlAttribute("colspan", "2"));
+            doc.AddStylesheet(@"css/main.css");
+            doc.AddStylesheet(@"css/backgrounds.css");
 
-            root.Children.Add(table.Root);
+            doc.AddScript(@"js/jquery.js");
 
-            doc.Body.Children.Add(root);
+            HtmlElement div = new HtmlElement("div", "wrapper");
+            HtmlElement p = new HtmlElement("p");
+            string baconFiller = @"Bacon ipsum dolor amet spare ribs beef ribs porchetta meatloaf ham shoulder ham hock bresaola ball tip rump kielbasa swine alcatra kevin. Turducken andouille jowl, corned beef short ribs beef beef ribs flank fatback pork belly shank frankfurter cupim shoulder. Sirloin meatloaf porchetta t-bone. Sirloin kevin venison meatball tenderloin flank turducken pig tongue t-bone cow corned beef alcatra. Kielbasa landjaeger ball tip prosciutto salami pork chop tail rump fatback.";
+            p.Children.Add(new HtmlContent(baconFiller));
 
-            doc.AddScript("randomScript");
-            doc.AddScript("blahScript");
-            doc.AddScript("deleteScript");
-            doc.AddScript("yayScript");
-            doc.RemoveScript("deleteScript");
-
-            doc.AddStylesheet("randomStylesheet");
-            doc.AddStylesheet("blahStylesheet");
-            doc.AddStylesheet("deleteStylesheet");
-            doc.AddStylesheet("yayStylesheet");
-            doc.RemoveStylesheet("deleteStylesheet");
+            doc.Body.Children.Add(div);
+            doc.Body.Children.Add(p);
 
             string output = doc.ToString();
             output = HtmlDocument.CleanupHtml(output);
             output = HtmlDocument.PrettyPrint(output);
+
             Console.WriteLine(output);
             
+            //This line just makes the console window stay open, it doesn't actually do anything
             Console.In.Read();
         }
     }
