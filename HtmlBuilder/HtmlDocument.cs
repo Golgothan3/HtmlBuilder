@@ -11,7 +11,7 @@ namespace HtmlBuilder
 
     public class HtmlDocument
     {
-        public string DocType { get; }
+        public string DocType { get; } = "<!DOCTYPE html>";
         public HtmlElement Root { get; } = new HtmlElement("html");
         public HtmlElement Head { get; } = new HtmlElement("head");
         public HtmlElement Title { get; } = new HtmlElement("title");
