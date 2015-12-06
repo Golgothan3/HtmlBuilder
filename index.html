@@ -112,7 +112,7 @@
 
 <p>Say you want to add text to that <em>span</em> element from earlier, how do you do it? You simply add a new <strong>HtmlContent</strong> object to the <strong>Children</strong> property of <em>span</em>. See, <strong>HtmlContent</strong> is a subclass of <strong>HtmlElement</strong>, which makes outputting it and adding it to the flow easy. You simply pass what text you want as an argument to the constructor when you instantiate it, and you're done!</p>
 
-<div class="highlight highlight-source-cs"><pre>span.Children.Add(<span class="pl-k">new</span> HtmlContent(<span class="pl-s"><span class="pl-pds">"</span>Hello, Interwebz!<span class="pl-pds">"</span></span>);</pre></div>
+<div class="highlight highlight-source-cs"><pre>span.Children.Add(<span class="pl-k">new</span> HtmlContent(<span class="pl-s"><span class="pl-pds">"</span>Hello, Interwebz!<span class="pl-pds">"</span></span>));</pre></div>
 
 <p>Now, when you output <em>div</em>, it will return</p>
 
