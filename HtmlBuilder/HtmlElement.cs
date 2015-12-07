@@ -20,6 +20,7 @@ namespace HtmlBuilder
         {
             this.TagName = tagName;
         }
+
         public HtmlElement(string tagName, string idName)
         {
             this.TagName = tagName;
@@ -30,6 +31,12 @@ namespace HtmlBuilder
             this.TagName = tagName;
             this.Id = new HtmlId(idName);
             this.CssClass = new HtmlClass(className);
+        }
+
+        public HtmlElement SetContent(string content)
+        {
+            this.Children.Add(new HtmlContent(content));
+            return this;
         }
 
         public override string ToString()
