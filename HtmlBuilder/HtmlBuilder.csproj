@@ -39,13 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HtmlAttribute.cs" />
-    <Compile Include="HtmlClass.cs" />
-    <Compile Include="HtmlContent.cs" />
-    <Compile Include="HtmlElement.cs" />
-    <Compile Include="HtmlDocument.cs" />
-    <Compile Include="HtmlId.cs" />
-    <Compile Include="HtmlTable.cs" />
+    <Compile Include="HtmlBuilderAttribute.cs" />
+    <Compile Include="HtmlBuilderClass.cs" />
+    <Compile Include="HtmlBuilderContent.cs" />
+    <Compile Include="HtmlBuilderElement.cs" />
+    <Compile Include="HtmlBuilderDocument.cs" />
+    <Compile Include="HtmlBuilderId.cs" />
+    <Compile Include="HtmlBuilderTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

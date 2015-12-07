@@ -6,9 +6,9 @@ using System.Diagnostics;
 
 namespace HtmlBuilder
 {
-    public class HtmlId : HtmlAttribute
+    public class HtmlBuilderId : HtmlBuilderAttribute
     {
-        public HtmlId(string value) : base("Id", value)
+        public HtmlBuilderId(string value) : base("id", value)
         {
         }
 

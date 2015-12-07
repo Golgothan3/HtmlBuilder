@@ -9,22 +9,22 @@ using System.Text.RegularExpressions;
 namespace HtmlBuilder
 {
 
-    public class HtmlDocument
+    public class HtmlBuilderDocument
     {
         public string DocType { get; set; } = "<!DOCTYPE html>";
-        public HtmlElement Root { get; } = new HtmlElement("html");
-        public HtmlElement Head { get; } = new HtmlElement("head");
-        public HtmlElement Title { get; } = new HtmlElement("title");
+        public HtmlBuilderElement Root { get; } = new HtmlBuilderElement("html");
+        public HtmlBuilderElement Head { get; } = new HtmlBuilderElement("head");
+        public HtmlBuilderElement Title { get; } = new HtmlBuilderElement("title");
         public List<string> Stylesheets { get; } = new List<string>();
-        public HtmlElement Body { get; } = new HtmlElement("body");
+        public HtmlBuilderElement Body { get; } = new HtmlBuilderElement("body");
         public List<string> Scripts { get; } = new List<string>();
 
-        public HtmlDocument(string title)
+        public HtmlBuilderDocument(string title)
         {
             Root.Children.Add(Head);
             Root.Children.Add(Body);
             Head.Children.Add(this.Title);
-            this.Title.Children.Add(new HtmlContent(title));
+            this.Title.Children.Add(new HtmlBuilderContent(title));
         }
 
         public void AddScript(string src)
@@ -52,16 +52,16 @@ namespace HtmlBuilder
             //Add all the scripts to the end of the body element. It creates a script tag for each string in the Scripts list
             foreach (string src in Scripts)
             {
-                HtmlElement script = new HtmlElement("script");
-                script.Attributes.Add(new HtmlAttribute("src", src));
+                HtmlBuilderElement script = new HtmlBuilderElement("script");
+                script.Attributes.Add(new HtmlBuilderAttribute("src", src));
                 Body.Children.Add(script);
             }
             //Add all stylesheet links to the end of the head element. It creates a link tag for each string in the Stylesheets list
             foreach (string href in Stylesheets)
             {
-                HtmlElement stylesheet = new HtmlElement("link");
-                stylesheet.Attributes.Add(new HtmlAttribute("rel", "stylesheet"));
-                stylesheet.Attributes.Add(new HtmlAttribute("href", href));
+                HtmlBuilderElement stylesheet = new HtmlBuilderElement("link");
+                stylesheet.Attributes.Add(new HtmlBuilderAttribute("rel", "stylesheet"));
+                stylesheet.Attributes.Add(new HtmlBuilderAttribute("href", href));
                 Head.Children.Add(stylesheet);
             }
 

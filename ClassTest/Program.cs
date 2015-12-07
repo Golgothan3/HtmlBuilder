@@ -11,7 +11,7 @@ namespace ClassTest
     {
         static void Main(string[] args)
         {
-            HtmlDocument doc = new HtmlDocument("HtmlBuilder Rocks");
+            HtmlBuilderDocument doc = new HtmlBuilderDocument("HtmlBuilder Rocks");
 
             doc.DocType = "<!DOCTYPE html>";
 
@@ -20,17 +20,17 @@ namespace ClassTest
 
             doc.AddScript(@"js/jquery.js");
 
-            HtmlElement div = new HtmlElement("div", "wrapper");
-            HtmlElement p = new HtmlElement("p");
+            HtmlBuilderElement div = new HtmlBuilderElement("div", "wrapper");
+            HtmlBuilderElement p = new HtmlBuilderElement("p");
             string baconFiller = @"Bacon ipsum dolor amet spare ribs beef ribs porchetta meatloaf ham shoulder ham hock bresaola ball tip rump kielbasa swine alcatra kevin. Turducken andouille jowl, corned beef short ribs beef beef ribs flank fatback pork belly shank frankfurter cupim shoulder. Sirloin meatloaf porchetta t-bone. Sirloin kevin venison meatball tenderloin flank turducken pig tongue t-bone cow corned beef alcatra. Kielbasa landjaeger ball tip prosciutto salami pork chop tail rump fatback.";
-            p.Children.Add(new HtmlContent(baconFiller));
+            p.Children.Add(new HtmlBuilderContent(baconFiller));
 
             doc.Body.Children.Add(div);
             doc.Body.Children.Add(p);
 
             string output = doc.ToString();
-            output = HtmlDocument.CleanupHtml(output);
-            output = HtmlDocument.PrettyPrint(output);
+            output = HtmlBuilderDocument.CleanupHtml(output);
+            output = HtmlBuilderDocument.PrettyPrint(output);
 
             Console.WriteLine(output);
             

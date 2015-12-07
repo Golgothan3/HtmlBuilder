@@ -7,10 +7,10 @@ using System.Text.RegularExpressions;
 
 namespace HtmlBuilder
 {
-    public class HtmlClass : HtmlAttribute
+    public class HtmlBuilderClass : HtmlBuilderAttribute
     {
 
-        public HtmlClass(string className) : base("Class", className)
+        public HtmlBuilderClass(string className) : base("Class", className)
         {
         }
 

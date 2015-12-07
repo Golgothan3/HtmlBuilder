@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 
 namespace HtmlBuilder
 {
-    public class HtmlAttribute
+    public class HtmlBuilderAttribute
     {
         private string _name;
         public string Name
@@ -16,7 +16,7 @@ namespace HtmlBuilder
         }
         public string Value { get; set; }
 
-        public HtmlAttribute(string name, string value)
+        public HtmlBuilderAttribute(string name, string value)
         {
             this._name = name;
             this.Value = value;

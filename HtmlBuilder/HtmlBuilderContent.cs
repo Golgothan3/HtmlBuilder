@@ -6,12 +6,12 @@ using System.Diagnostics;
 
 namespace HtmlBuilder
 {
-    public class HtmlContent : HtmlElement
+    public class HtmlBuilderContent : HtmlBuilderElement
     {
 
 
         public string Content;
-        public HtmlContent(string content) : base("TextNode")
+        public HtmlBuilderContent(string content) : base("TextNode")
         {
             this.Content = content;
         }

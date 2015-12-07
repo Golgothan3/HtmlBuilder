@@ -8,34 +8,34 @@ using System.Text;
 
 namespace HtmlBuilder
 {
-    public class HtmlElement
+    public class HtmlBuilderElement
     {
         public string TagName { get; set; }
-        public HtmlId Id { get; set; } = new HtmlId("");
-        public HtmlClass CssClass { get; set; } = new HtmlClass("");
-        public List<HtmlAttribute> Attributes { get; set; } = new List<HtmlAttribute>();
-        public List<HtmlElement> Children { get; set; } = new List<HtmlElement>();
+        public HtmlBuilderId Id { get; set; } = new HtmlBuilderId("");
+        public HtmlBuilderClass CssClass { get; set; } = new HtmlBuilderClass("");
+        public List<HtmlBuilderAttribute> Attributes { get; set; } = new List<HtmlBuilderAttribute>();
+        public List<HtmlBuilderElement> Children { get; set; } = new List<HtmlBuilderElement>();
 
-        public HtmlElement(string tagName)
+        public HtmlBuilderElement(string tagName)
         {
             this.TagName = tagName;
         }
 
-        public HtmlElement(string tagName, string idName)
+        public HtmlBuilderElement(string tagName, string idName)
         {
             this.TagName = tagName;
-            this.Id = new HtmlId(idName);
+            this.Id = new HtmlBuilderId(idName);
         }
-        public HtmlElement(string tagName, string idName, string className)
+        public HtmlBuilderElement(string tagName, string idName, string className)
         {
             this.TagName = tagName;
-            this.Id = new HtmlId(idName);
-            this.CssClass = new HtmlClass(className);
+            this.Id = new HtmlBuilderId(idName);
+            this.CssClass = new HtmlBuilderClass(className);
         }
 
-        public HtmlElement SetContent(string content)
+        public HtmlBuilderElement SetContent(string content)
         {
-            this.Children.Add(new HtmlContent(content));
+            this.Children.Add(new HtmlBuilderContent(content));
             return this;
         }
 
@@ -47,7 +47,7 @@ namespace HtmlBuilder
         public object GetChildrenString()
         {
             StringBuilder sb = new StringBuilder();
-            foreach (HtmlElement child in Children)
+            foreach (HtmlBuilderElement child in Children)
             {
                 sb.Append(child.ToString());
             }
@@ -57,7 +57,7 @@ namespace HtmlBuilder
         public object GetAttributesString()
         {
             StringBuilder sb = new StringBuilder();
-            foreach (HtmlAttribute attr in Attributes)
+            foreach (HtmlBuilderAttribute attr in Attributes)
             {
                 sb.Append(attr.ToString());
             }
@@ -65,14 +65,14 @@ namespace HtmlBuilder
 
         }
 
-        public List<HtmlElement> GetChildrenByTagName(string tagName)
+        public List<HtmlBuilderElement> GetChildrenByTagName(string tagName)
         {
             return (from child in Children where child.TagName == tagName select child).ToList();
         }
 
         public void RemoveAttribute(string attributeName)
         {
-            Attributes.Remove((from HtmlAttribute attr in Attributes where attr.Name == attributeName select attr).First());
+            Attributes.Remove((from HtmlBuilderAttribute attr in Attributes where attr.Name == attributeName select attr).First());
         }
     }
 

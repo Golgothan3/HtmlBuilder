@@ -7,16 +7,16 @@ using System.Linq;
 
 namespace HtmlBuilder
 {
-    public class HtmlTable
+    public class HtmlBuilderTable
     {
-        public HtmlElement Root { get; } = new HtmlElement("table");
-        public HtmlElement Header { get; } = new HtmlElement("thead");
-        public HtmlElement Body { get; } = new HtmlElement("tbody");
-        public HtmlElement Footer { get; } = new HtmlElement("tfoot");
-        public List<HtmlElement> Rows { get; } = new List<HtmlElement>();
+        public HtmlBuilderElement Root { get; } = new HtmlBuilderElement("table");
+        public HtmlBuilderElement Header { get; } = new HtmlBuilderElement("thead");
+        public HtmlBuilderElement Body { get; } = new HtmlBuilderElement("tbody");
+        public HtmlBuilderElement Footer { get; } = new HtmlBuilderElement("tfoot");
+        public List<HtmlBuilderElement> Rows { get; } = new List<HtmlBuilderElement>();
         public List<string> Columns { get; set; }
 
-        public HtmlTable()
+        public HtmlBuilderTable()
         {
             Root.Children.Add(Header);
             Root.Children.Add(Body);
@@ -27,35 +27,35 @@ namespace HtmlBuilder
         {
             for (int i = 0; i <= rowsToAdd - 1; i++)
             {
-                HtmlElement newRow = new HtmlElement("tr");
+                HtmlBuilderElement newRow = new HtmlBuilderElement("tr");
                 Body.Children.Add(newRow);
                 Rows.Add(newRow);
                 if (addColumns)
                 {
                     for (int j = 0; j <= Columns.Count - 1; j++)
                     {
-                        newRow.Children.Add(new HtmlElement("td"));
+                        newRow.Children.Add(new HtmlBuilderElement("td"));
                     }
                 }
             }
         }
 
-        public HtmlElement AddRow(List<string> columnData)
+        public HtmlBuilderElement AddRow(List<string> columnData)
         {
-            HtmlElement newRow = new HtmlElement("tr");
+            HtmlBuilderElement newRow = new HtmlBuilderElement("tr");
             Body.Children.Add(newRow);
             Rows.Add(newRow);
 
             for (int i = 0; i <= columnData.Count - 1; i++)
             {
-                newRow.Children.Add(new HtmlElement("td"));
-                newRow.GetChildrenByTagName("td").Last().Children.Add(new HtmlContent(columnData[i]));
+                newRow.Children.Add(new HtmlBuilderElement("td"));
+                newRow.GetChildrenByTagName("td").Last().Children.Add(new HtmlBuilderContent(columnData[i]));
             }
 
             return newRow;
         }
 
-        public HtmlElement GetCellFromColumn(HtmlElement row, int columnIndex)
+        public HtmlBuilderElement GetCellFromColumn(HtmlBuilderElement row, int columnIndex)
         {
             return row.Children[columnIndex];
         }
@@ -63,12 +63,12 @@ namespace HtmlBuilder
         public void CreateHeaderFromColumns()
         {
             Header.Children.Clear();
-            Header.Children.Add(new HtmlElement("tr"));
-            HtmlElement firstRow = Header.GetChildrenByTagName("tr")[0];
+            Header.Children.Add(new HtmlBuilderElement("tr"));
+            HtmlBuilderElement firstRow = Header.GetChildrenByTagName("tr")[0];
             for (int i = 0; i <= Columns.Count - 1; i++)
             {
-                firstRow.Children.Add(new HtmlElement("th"));
-                firstRow.GetChildrenByTagName("th").Last().Children.Add(new HtmlContent(Columns[i]));
+                firstRow.Children.Add(new HtmlBuilderElement("th"));
+                firstRow.GetChildrenByTagName("th").Last().Children.Add(new HtmlBuilderContent(Columns[i]));
             }
         }
 
@@ -83,12 +83,12 @@ namespace HtmlBuilder
             return Root.ToString();
         }
 
-        public HtmlElement GetLastRow()
+        public HtmlBuilderElement GetLastRow()
         {
             return Rows.Last();
         }
 
-        public HtmlElement GetFirstRow()
+        public HtmlBuilderElement GetFirstRow()
         {
             return Rows[0];
         }
