@@ -31,7 +31,7 @@
           <h1>
 <a id="htmlbuilder" class="anchor" href="#htmlbuilder" aria-hidden="true"><span class="octicon octicon-link"></span></a>HtmlBuilder</h1>
 
-<p>This is a fairly simple, but really clean, in my opinion, library for building simple html. You can build individual elements through classes like <strong>HtmlElement</strong> or you can format entire Html Documents through the <strong>HtmlDocument</strong> class. </p>
+<p>This is a fairly simple, but really clean, in my opinion, library for building simple html. You can build individual elements through classes like <strong>HtmlBuilderElement</strong> or you can format entire Html Documents through the <strong>HtmlBuilderDocument</strong> class. </p>
 
 <h3>
 <a id="a-little-background" class="anchor" href="#a-little-background" aria-hidden="true"><span class="octicon octicon-link"></span></a>A Little Background</h3>
@@ -49,7 +49,7 @@
 <h3>
 <a id="creating-an-element" class="anchor" href="#creating-an-element" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating an Element</h3>
 
-<p>The constructor for the <strong>HtmlElement</strong> class has 3 versions including the overloads. They allow you to instantiate a new <strong>HtmlElement</strong> with</p>
+<p>The constructor for the <strong>HtmlBuilderElement</strong> class has 3 versions including the overloads. They allow you to instantiate a new <strong>HtmlBuilderElement</strong> with</p>
 
 <ol>
 <li>A <em>tag</em> (i.e. div, table, span, body, etc.)</li>
@@ -61,9 +61,9 @@
 
 <p>So, say you want to create a <em>div</em> element without a class or id. Using C# (as all my examples will) you would do</p>
 
-<div class="highlight highlight-source-cs"><pre>HtmlElement div = <span class="pl-k">new</span> HtmlElement(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>); </pre></div>
+<div class="highlight highlight-source-cs"><pre>HtmlBuilderElement div = <span class="pl-k">new</span> HtmlBuilderElement(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>); </pre></div>
 
-<p>However, if you wanted to add a class called "redBackground", you could do so through the <strong>CssClass</strong> property on your <em>div</em> variable. </p>
+<p>However, if you wanted to add a class called "redBackground", you could do so through the <strong>CssClass</strong> property on your <em>div</em> object. </p>
 
 <div class="highlight highlight-source-cs"><pre>div.CssClass.AddClass(<span class="pl-s"><span class="pl-pds">"</span>redBackground<span class="pl-pds">"</span></span>);</pre></div>
 
@@ -75,7 +75,7 @@
 
 <p>Say you want that to have a child element, though, how would you do that? Easy just create another element to nest</p>
 
-<div class="highlight highlight-source-cs"><pre>HtmlElement span = <span class="pl-k">new</span> HtmlElement(<span class="pl-s"><span class="pl-pds">"</span>span<span class="pl-pds">"</span></span>);</pre></div>
+<div class="highlight highlight-source-cs"><pre>HtmlBuilderElement span = <span class="pl-k">new</span> HtmlBuilderElement(<span class="pl-s"><span class="pl-pds">"</span>span<span class="pl-pds">"</span></span>);</pre></div>
 
 <p>Then add it to the list property <strong>Children</strong> of the parent element.</p>
 
@@ -88,7 +88,7 @@
 <h3>
 <a id="attributes" class="anchor" href="#attributes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Attributes</h3>
 
-<p>Attributes are also really easo to work with if I do say so myself. Using the previous example, say you want to add an attribute, other than <em>class</em> or <em>id</em> which have their own classes, just use the <strong>HtmlAttribute</strong> class. Say you want to add an attribute to that span called <em>data-order-number</em> and give it a value of <em>3B2</em>, then all you have to do is call the <strong>Add</strong> method on the property list <strong>Attributes</strong> of your <strong>HtmlElement</strong>.</p>
+<p>Attributes are also really easy to work with if I do say so myself. Using the previous example, say you want to add an attribute, other than <em>class</em> or <em>id</em> which have their own classes, just use the <strong>HtmlBuilderAttribute</strong> class. Say you want to add an attribute to that span called <em>data-order-number</em> and give it a value of <em>3B2</em>, then all you have to do is call the <strong>Add</strong> method on the property list <strong>Attributes</strong> of your <strong>HtmlBuilderElement</strong>.</p>
 
 <div class="highlight highlight-source-cs"><pre>span.Attributes.Add(<span class="pl-k">new</span> HtmlAttribute(<span class="pl-s"><span class="pl-pds">"</span>data-order-number<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>3B2'));</span></pre></div>
 
@@ -101,7 +101,7 @@
 <h5>
 <a id="removing-attributes" class="anchor" href="#removing-attributes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Removing Attributes</h5>
 
-<p>I wanted a little disclaimer here. While it may seem counterintuitive, you don't remove attributes simply by calling <em>Remove()</em> on the <strong>Attributes</strong> property. You actually call <strong>RemoveAttribute(string <em>attributeName</em>)</strong> on the <strong>HtmlElement</strong> itself. So, if you want to remove the attribute we added, you would do so like this</p>
+<p>I wanted a little disclaimer here. While it may seem counterintuitive, you don't remove attributes simply by calling <em>Remove()</em> on the <strong>Attributes</strong> property. You actually call <strong>RemoveAttribute(string <em>attributeName</em>)</strong> on the <strong>HtmlBuilderElement</strong> itself. So, if you want to remove the attribute we added, you would do so like this</p>
 
 <div class="highlight highlight-source-cs"><pre>span.RemoveAttribute(<span class="pl-s"><span class="pl-pds">"</span>data-order-number<span class="pl-pds">"</span></span>);</pre></div>
 
@@ -110,9 +110,9 @@
 <h3>
 <a id="adding-content" class="anchor" href="#adding-content" aria-hidden="true"><span class="octicon octicon-link"></span></a>Adding Content</h3>
 
-<p>Say you want to add text to that <em>span</em> element from earlier, how do you do it? You simply add a new <strong>HtmlContent</strong> object to the <strong>Children</strong> property of <em>span</em>. See, <strong>HtmlContent</strong> is a subclass of <strong>HtmlElement</strong>, which makes outputting it and adding it to the flow easy. You simply pass what text you want as an argument to the constructor when you instantiate it, and you're done!</p>
+<p>Say you want to add text to that <em>span</em> element from earlier, how do you do it? You simply add a new <strong>HtmlBuilderContent</strong> object to the <strong>Children</strong> property of <em>span</em>. See, <strong>HtmlBuilderContent</strong> is a subclass of <strong>HtmlBuilderElement</strong>, which makes outputting it and adding it to the flow easy. You simply pass what text you want as an argument to the constructor when you instantiate it, and you're done!</p>
 
-<div class="highlight highlight-source-cs"><pre>span.Children.Add(<span class="pl-k">new</span> HtmlContent(<span class="pl-s"><span class="pl-pds">"</span>Hello, Interwebz!<span class="pl-pds">"</span></span>));</pre></div>
+<div class="highlight highlight-source-cs"><pre>span.Children.Add(<span class="pl-k">new</span> HtmlBuilderContent(<span class="pl-s"><span class="pl-pds">"</span>Hello, Interwebz!<span class="pl-pds">"</span></span>));</pre></div>
 
 <p>Now, when you output <em>div</em>, it will return</p>
 
@@ -121,24 +121,24 @@
 <h3>
 <a id="creating-an-html-document" class="anchor" href="#creating-an-html-document" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating an Html Document</h3>
 
-<p>Okay, so, now you want to create an entire HTML page. That means you'll have to add a <em>head</em> element and <em>body</em> and <em>title</em> and so-on, right? <strong>HELL NO</strong>. That would suck. Just create a new <strong>HtmlDocument</strong> object and it handles that crap for you! All you have to do is set the doctype you want through the <strong>DocType</strong> property (you'll have to format the whole string yourself though, so don't forget the opening and closing arrows, etc.), add the string for the <em>src</em> and and <em>href</em> attributes of the <em>script</em> and <em>style</em> tags through the properties <strong>Stylesheets</strong> and <strong>Scripts</strong>, and call our trusty <strong>ToString()</strong> method. Now, this will get you what you <strong><em>need</em></strong>, but there are some static methods that may help you get what you <strong><em>want</em></strong>.</p>
+<p>Okay, so, now you want to create an entire HTML page. That means you'll have to add a <em>head</em> element and <em>body</em> and <em>title</em> and so-on, right? <strong>HELL NO</strong>. That would suck. Just create a new <strong>HtmlBuilderDocument</strong> object and it handles that crap for you! All you have to do is set the doctype you want through the <strong>DocType</strong> property (you'll have to format the whole string yourself though, so don't forget the opening and closing arrows, etc.), add the string for the <em>src</em> and and <em>href</em> attributes of the <em>script</em> and <em>style</em> tags through the properties <strong>Stylesheets</strong> and <strong>Scripts</strong>, and call our trusty <strong>ToString()</strong> method. Now, this will get you what you <strong><em>need</em></strong>, but there are some static methods that may help you get what you <strong><em>want</em></strong>.</p>
 
 <h5>
 <a id="cleanup" class="anchor" href="#cleanup" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cleanup</h5>
 
-<p>Now, I'm not perfect, so when this outputs, there will be one annoying thing -- <em>lots of unnecessary whitespace</em>. This is a result of the way I parse and format the text, so the best way to handle this is to call the static method of the <strong>HtmlDocument</strong> class, <strong>Cleanup(string <em>html</em>)</strong> which returns a cleaned up version of your HTML string.</p>
+<p>Now, I'm not perfect, so when this outputs, there will be one annoying thing -- <em>lots of unnecessary whitespace</em>. This is a result of the way I parse and format the text, so the best way to handle this is to call the static method of the <strong>HtmlBuilderDocument</strong> class, <strong>Cleanup(string <em>html</em>)</strong> which returns a cleaned up version of your HTML string.</p>
 
 <h5>
 <a id="pretty-print" class="anchor" href="#pretty-print" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pretty Print</h5>
 
-<p>When you output your <strong>HtmlDocument</strong> it will output as a single-line string. This won't affect how it renders in the browser or anything because it will parse and format it the best it can anyway, because it is smarter than us, and it knows it, however, if you decide that you want to see the HTML formatted in a tree-like markup structure, the way it <em>should</em> look, then call the static method <strong>PrettyPrint(string <em>html</em>)</strong> from the <strong>HtmlDocument</strong> class and it will return a version of the string with new lines and indentations to help it look totally formatted. Don't get me wrong, it has some drawbacks based on how it works internally, but it still <em>prints pretty</em>.</p>
+<p>When you output your <strong>HtmlBuilderDocument</strong> it will output as a single-line string. This won't affect how it renders in the browser or anything because it will parse and format it the best it can anyway, because it is smarter than us, and it knows it, however, if you decide that you want to see the HTML formatted in a tree-like markup structure, the way it <em>should</em> look, then call the static method <strong>PrettyPrint(string <em>html</em>)</strong> from the <strong>HtmlBuilderDocument</strong> class and it will return a version of the string with new lines and indentations to help it look totally formatted. Don't get me wrong, it has some drawbacks based on how it works internally, but it still <em>prints pretty</em>.</p>
 
 <h3>
 <a id="so" class="anchor" href="#so" aria-hidden="true"><span class="octicon octicon-link"></span></a>So...</h3>
 
 <p>Through all that, plus everything we've already went over, you can output a completely valid and super sexy HTML string for whatever you need. Here's a little demo that is included in the Console Program called "ClassTest" in the Solution.</p>
 
-<div class="highlight highlight-source-cs"><pre>HtmlDocument doc = <span class="pl-k">new</span> HtmlDocument(<span class="pl-s"><span class="pl-pds">"</span>HtmlBuilder Rocks<span class="pl-pds">"</span></span>);
+<div class="highlight highlight-source-cs"><pre>HtmlBuilderDocument doc = <span class="pl-k">new</span> HtmlBuilderDocument(<span class="pl-s"><span class="pl-pds">"</span>HtmlBuilder Rocks<span class="pl-pds">"</span></span>);
 
 doc.DocType = <span class="pl-s"><span class="pl-pds">"</span>&lt;!DOCTYPE html&gt;<span class="pl-pds">"</span></span>;
 
@@ -147,17 +147,17 @@ doc.AddStylesheet(<span class="pl-s"><span class="pl-pds">@"css/backgrounds.css"
 
 doc.AddScript(<span class="pl-s"><span class="pl-pds">@"js/jquery.js"</span></span>);
 
-HtmlElement div = <span class="pl-k">new</span> HtmlElement(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>wrapper<span class="pl-pds">"</span></span>);
-HtmlElement p = <span class="pl-k">new</span> HtmlElement(<span class="pl-s"><span class="pl-pds">"</span>p<span class="pl-pds">"</span></span>);
+HtmlBuilderElement div = <span class="pl-k">new</span> HtmlBuilderElement(<span class="pl-s"><span class="pl-pds">"</span>div<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>wrapper<span class="pl-pds">"</span></span>);
+HtmlBuilderElement p = <span class="pl-k">new</span> HtmlBuilderElement(<span class="pl-s"><span class="pl-pds">"</span>p<span class="pl-pds">"</span></span>);
 <span class="pl-k">string</span> baconFiller = <span class="pl-s"><span class="pl-pds">@"Bacon ipsum dolor amet spare ribs beef ribs porchetta meatloaf ham shoulder ham hock bresaola ball tip rump kielbasa swine alcatra kevin. Turducken andouille jowl, corned beef short ribs beef beef ribs flank fatback pork belly shank frankfurter cupim shoulder. Sirloin meatloaf porchetta t-bone. Sirloin kevin venison meatball tenderloin flank turducken pig tongue t-bone cow corned beef alcatra. Kielbasa landjaeger ball tip prosciutto salami pork chop tail rump fatback."</span></span>;
-p.Children.Add(<span class="pl-k">new</span> HtmlContent(baconFiller));
+p.Children.Add(<span class="pl-k">new</span> HtmlBuilderContent(baconFiller));
 
 doc.Body.Children.Add(div);
 doc.Body.Children.Add(p);
 
 <span class="pl-k">string</span> output = doc.ToString();
-output = HtmlDocument.CleanupHtml(output);
-output = HtmlDocument.PrettyPrint(output);
+output = HtmlBuilderDocument.CleanupHtml(output);
+output = HtmlBuilderDocument.PrettyPrint(output);
 
 Console.WriteLine(output);
 
