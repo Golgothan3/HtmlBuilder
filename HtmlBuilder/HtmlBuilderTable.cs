@@ -92,5 +92,17 @@ namespace HtmlBuilder
         {
             return Rows[0];
         }
+
+        public void CreateFromDataTable(DataTable dt)
+        {
+
+            Columns = (from DataColumn column in dt.Columns select column.ColumnName).ToList<string>();
+            CreateHeaderFromColumns();
+
+            foreach (DataRow row in dt.Rows)
+            {
+                AddRow((from object value in row.ItemArray select value.ToString()).ToList<string>());
+            }
+        }
     }
 }
