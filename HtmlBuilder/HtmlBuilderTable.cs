@@ -55,6 +55,13 @@ namespace HtmlBuilder
             return newRow;
         }
 
+        public HtmlBuilderElement AddRow(string parseString)
+        {
+            Rows.Add(HtmlBuilderElement.Parse(parseString));
+
+            return GetLastRow();
+        }
+
         public HtmlBuilderElement GetCellFromColumn(HtmlBuilderElement row, int columnIndex)
         {
             return row.Children[columnIndex];

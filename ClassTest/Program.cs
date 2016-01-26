@@ -11,9 +11,7 @@ namespace ClassTest
     {
         static void Main(string[] args)
         {
-            HtmlBuilderDocument doc = new HtmlBuilderDocument("HtmlBuilder Rocks");
-
-            doc.DocType = "<!DOCTYPE html>";
+            HtmlBuilderDocument doc = new HtmlBuilderDocument("HtmlBuilder Rocks") {DocType = "<!DOCTYPE html>"};
 
             doc.AddStylesheet(@"css/main.css");
             doc.AddStylesheet(@"css/backgrounds.css");
@@ -23,10 +21,13 @@ namespace ClassTest
             HtmlBuilderElement div = new HtmlBuilderElement("div", "wrapper");
             HtmlBuilderElement p = new HtmlBuilderElement("p");
             string baconFiller = @"Bacon ipsum dolor amet spare ribs beef ribs porchetta meatloaf ham shoulder ham hock bresaola ball tip rump kielbasa swine alcatra kevin. Turducken andouille jowl, corned beef short ribs beef beef ribs flank fatback pork belly shank frankfurter cupim shoulder. Sirloin meatloaf porchetta t-bone. Sirloin kevin venison meatball tenderloin flank turducken pig tongue t-bone cow corned beef alcatra. Kielbasa landjaeger ball tip prosciutto salami pork chop tail rump fatback.";
-            p.Children.Add(new HtmlBuilderContent(baconFiller));
+
+            div.Children.Add(p.SetContent(baconFiller));
+            div.Children.Add(
+                HtmlBuilderElement.Parse(
+                    "<div class='thisIsAClass' id='thisIsAnId' data-duh='123'><ul><li><strong>Stuff</strong></li><li>and <strong><em>things</em></strong></li></ul></div>"));
 
             doc.Body.Children.Add(div);
-            doc.Body.Children.Add(p);
 
             string output = doc.ToString();
             output = HtmlBuilderDocument.CleanupHtml(output);
